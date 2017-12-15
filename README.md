@@ -1,3 +1,5 @@
+*This readme best viewed in a text editor*
+
 1.	REQUIREMENTS
 
 	1.1	Required Files
