@@ -30,8 +30,8 @@ DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 DB_CONNECTION = None
 DB_CURSOR = None
 
-DEBUG = True
-GETNEWDATA = False
+DEBUG = False
+GETNEWDATA = True
 
 promptMsg = ""
 originalPrompt = "\nPlease the type the name of a Dominion card (case-sensitive) or set you would like to know about, type 'help' for a list of other commands, or 'exit' to leave the program.\n"
