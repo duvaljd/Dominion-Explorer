@@ -37,7 +37,7 @@ This program requires a PSQL database. See 2.1 below for setup instructions.
 ### 1.	Database
 - Create a PSQL database with the name:
 
-duvaljd_507final
+> duvaljd_507final
 
 (Alternatively, you may name the database anything you want - you'll just have to update the DB_NAME variable in creds.py.)
 
@@ -59,14 +59,14 @@ duvaljd_507final
 
 - To install the required modules, type:
 
-pip install -r requirements.txt
+> pip install -r requirements.txt
 
 ### 4.	Run the file for the first time
 - In a command prompt, navigate to the project folder.
 
 - From the command prompt, type:
 
-py SI507F17_finalproject.py
+> py SI507F17_finalproject.py
 
 - The program will take several minutes to run the first time, because it collects a large amount of data from hundreds of individual web pages. Please be patient! If you wish to see please see section 2.3.
 
@@ -80,7 +80,7 @@ py SI507F17_finalproject.py
 
 - If you're at the main prompt and do not know what commands you can enter, type:
 
-help
+> help
 
 to get a list of commands.
 
@@ -89,7 +89,7 @@ to get a list of commands.
 ### 1.	Building a list of cards
 - Type:
 
-list
+> list
 
 to build a list of all the cards in the database that will be exported to a .xlsx file, dominion.xlsx, located in the same folder as SI507F17_finalproject.py. You can use this list to find cards to search for in the program.
 
@@ -98,7 +98,7 @@ to build a list of all the cards in the database that will be exported to a .xls
 
 - If you don't know the name of a card, you can type:
 
-random
+> random
 
 to let the program choose a random card for you.
 - Once you have selected a card by typing its name or the random command, the details of the card will be displayed, followed by a new prompt that lists the commands you can run on the currently selected card.
@@ -110,31 +110,32 @@ to let the program choose a random card for you.
 
 - Typing:
 
-card
+> card
 
 generates an xlsx file in the same folder as SI507F17_finalproject.py. The file name is the name of the card, prefixed by card_.
 
 - Typing:
 
-recs
+> recs
 
 generates an xlsx file in the same folder as SI507F17_finalproject.py. The file name is the name of the card, prefixed by recs_.
 
 - Typing:
 
-set
+> set
+
 generates an xlsx file in the same folder as SI507F17_finalproject.py. The file name is the name of the card, prefixed by sets_.
 
 ### 4.	Exiting the program
 - To exit the program, you must be at the main prompt. If you are at the card prompt, type:
 
-back
+> back
 
 to return to the main prompt.
 
 - Once you are at the main prompt, type:
 
-done
+> done
 
 to exit the program.
 
