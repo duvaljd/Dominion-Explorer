@@ -13,18 +13,18 @@ This program was built in Pythong 3.6, and it is recommended that you have Pytho
 
 Module | Version | Function
 ------ | ------- | --------
-- BeautifulSoup 4 | v4.6.0 | (for parsing the data from the dominion wiki)
-- DateTime | | (for setting an expiration date on cache entries)
-- JSON | | (for keeping the cache organized)
-- html5lib | | (used in conjunction with bs4 to scrape pages)
-- html2text | v2017.10.4 | (for parsing html collected from bs4)
-- openpyxl | v2.4.9 | (for creating the excel output files)
-- psycopg2 | v2.7.3.2 | (for interacting with the database)
-- random | | (for generating random cards if users don't know the names of cards)
-- requests | v2.18.4 | (for scraping data from the dominion wiki)
-- sys | | (for debugging)
-- os | | (for debugging)
-- unittest | | (for testing)
+BeautifulSoup 4 | v4.6.0 | (for parsing the data from the dominion wiki)
+DateTime | | (for setting an expiration date on cache entries)
+JSON | | (for keeping the cache organized)
+html5lib | | (used in conjunction with bs4 to scrape pages)
+html2text | v2017.10.4 | (for parsing html collected from bs4)
+openpyxl | v2.4.9 | (for creating the excel output files)
+psycopg2 | v2.7.3.2 | (for interacting with the database)
+random | | (for generating random cards if users don't know the names of cards)
+requests | v2.18.4 | (for scraping data from the dominion wiki)
+sys | | (for debugging)
+os | | (for debugging)
+unittest | | (for testing)
 
 ## 1.3 Required Database
 This program requires a PSQL database. See 2.1 below for setup instructions.
