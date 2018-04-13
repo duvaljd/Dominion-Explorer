@@ -11,6 +11,8 @@ All of these files should be present when you download this program:
 ## 1.2	Required Python Version & Modules
 This program was built in Pythong 3.6, and it is recommended that you have Python 3.6 installed to run it. All of the necessary modules can easily be installed via your command prompt; see step 3 of 2.1 below. The necessary modules are:
 
+Module | Version | Function
+------ | ------- | --------
 - BeautifulSoup 4 | v4.6.0 | (for parsing the data from the dominion wiki)
 - DateTime | | (for setting an expiration date on cache entries)
 - JSON | | (for keeping the cache organized)
