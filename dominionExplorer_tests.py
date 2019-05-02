@@ -1,5 +1,5 @@
 import unittest
-from SI507F17_finalproject import *
+from dominionExplorer import *
 
 class test_cacheFiles(unittest.TestCase):
     def setUp(self):

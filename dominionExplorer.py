@@ -1113,7 +1113,7 @@ while not DONE:
 
 	elif userInput.lower() == 'list':
 		makeList()
-		print("\nPlease look for the file 'dominion.xlsx' in the same directory as SI507F17_finalproject.py.")
+		print("\nPlease look for the file 'dominion.xlsx' in the same directory as dominionExplorer.py.")
 
 	elif userInput.lower() == 'random':
 		localMsg = "You can type:\n'card': print all info about this card to an excel file\n'recs': print all the recommmended sets of 10 this card is in to an excel file\n'set': print all info about the set this card belongs to, including a list of all other cards in the set\n'back': go back to main menu\n"
@@ -1130,17 +1130,17 @@ while not DONE:
 
 			if userInput.lower() == 'card':
 				makeFile_card(randomCard.cid)
-				print("\nPlease look for the file 'card_{}.xlsx' in the same directory as SI507F17_finalproject.py.".format(randomCard.cardName.lower().strip().replace('\'', '')))
+				print("\nPlease look for the file 'card_{}.xlsx' in the same directory as dominionExplorer.py.".format(randomCard.cardName.lower().strip().replace('\'', '')))
 
 			elif userInput.lower() == 'recs':
 				if makeFile_recs(randomCard.cid) == False:
 					print("\nSorry, there are no recommendations for '{}'!".format(randomCard.cardName.lower().strip().replace('\'', '')))
 				else:
-					print("\nPlease look for the 'file recs_{}.xlsx' in the same directory as SI507F17_finalproject.py.".format((randomCard.cardName.lower().strip().replace('\'', ''))))
+					print("\nPlease look for the 'file recs_{}.xlsx' in the same directory as dominionExplorer.py.".format((randomCard.cardName.lower().strip().replace('\'', ''))))
 
 			elif userInput.lower() == 'set':
 				makeFile_set(randomCard.cid)
-				print("\nPlease look for the file 'set_{}.xlsx' in the same directory as SI507F17_finalproject.py.".format(randomCard.setName.lower().strip().replace('\'', '')))
+				print("\nPlease look for the file 'set_{}.xlsx' in the same directory as dominionExplorer.py.".format(randomCard.setName.lower().strip().replace('\'', '')))
 
 			elif userInput.lower() == 'back':
 				localExit = True
@@ -1174,18 +1174,18 @@ while not DONE:
 
 				if userInput.lower() == 'card':
 					makeFile_card(userCard.cid)
-					print("\nPlease look for the file 'card_{}.xlsx' in the same directory as SI507F17_finalproject.py.".format(userCard.cardName.lower().strip().replace('\'', '')))
+					print("\nPlease look for the file 'card_{}.xlsx' in the same directory as dominionExplorer.py.".format(userCard.cardName.lower().strip().replace('\'', '')))
 
 				elif userInput.lower() == 'recs':
 					if makeFile_recs(userCard.cid) == False:
 						print("\nSorry, there are no recommendations for {}!".format(userCard.cardName))
 					else:
 						makeFile_recs(randCard.cid)
-						print("\nPlease look for the file 'recs_{}.xlsx' in the same directory as SI507F17_finalproject.py.".format((userCard.cardName.lower().strip().replace('\'', ''))))
+						print("\nPlease look for the file 'recs_{}.xlsx' in the same directory as dominionExplorer.py.".format((userCard.cardName.lower().strip().replace('\'', ''))))
 
 				elif userInput.lower() == 'set':
 					makeFile_set(userCard.cid)
-					print("\nPlease look for the file 'set_{}.xlsx' in the same directory as SI507F17_finalproject.py.".format(userCard.setName.lower().strip().replace('\'', '')))
+					print("\nPlease look for the file 'set_{}.xlsx' in the same directory as dominionExplorer.py.".format(userCard.setName.lower().strip().replace('\'', '')))
 
 				elif userInput.lower() == 'back':
 					localExit = True
