@@ -30,7 +30,7 @@ DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 DB_CONNECTION = None
 DB_CURSOR = None
 
-DEBUG = False
+DEBUG = True
 GETNEWDATA = True
 
 promptMsg = ""
@@ -300,7 +300,7 @@ def set_in_data_cache(cacheKey, url, data, expire_in_days):
 #  FUNCTIONS #
 ##  Data Collection ##
 ###  get html ###
-def getData(url, expire_in_days = 31, dataType = "card"):
+def getData(url, expire_in_days = 31, dataType = None):
 	data = get_from_cache("{} {}".format(url, dataType), CACHE_DICTION)
 
 	if data:
@@ -333,8 +333,10 @@ def getData(url, expire_in_days = 31, dataType = "card"):
 			elif dataType == "rec":
 				soup = BeautifulSoup(htmlContent, "html5lib")
 				for tag in soup.find('span', attrs={"class":"mw-headline", "id":"Recommended_Sets_of_10"}).find_parent('h2').next_siblings:
-					breakTags = ["p", "h2"]
-					if tag.name in breakTags:
+
+					if tag.name == "h2":
+						break
+					elif tag.name == "p" and tag.findChild() is not None:
 						break
 					else:
 						content += str(tag)
@@ -356,16 +358,17 @@ def getSetLinks():
 	soup = BeautifulSoup(data, "html5lib")
 	setLinks = []
 
-	for li in soup.find_all("li")[:-1]:
+	for li in soup.find_all("li"):
 		for link in li.find_all("a"):
-			setLinks.append(link["href"])
+			if link["href"] not in setLinks:
+				setLinks.append(link["href"])
 
 	return(setLinks)
 
 def getCardLinks():
 	data = getData("http://wiki.dominionstrategy.com/index.php/List_of_cards", dataType = "card")
 	soup = BeautifulSoup(data, "html5lib")
-	ignore = ['Hex', 'Event', 'Boon', 'Landmark', 'State', 'Promo']
+	ignore = ['Hex', 'Event', 'Boon', 'Landmark', 'State', 'Promo', 'Artifact', 'Project']
 	cardLinks = []
 
 	for span in soup.find_all("span", attrs={"class":["card-popup"]}):
@@ -455,19 +458,20 @@ def insertSet(setSoup):
 def insertCard(cardSoup):
 	ignoredCards = ['Sauna', 'Avanto']
 	name = cardSoup.find('strong').text
-	cost = cardSoup.find('a', title='Cost').findNext('img')['alt']
-	types = cardSoup.find('a', title='Card types').findNext('td').text
-	cset = cardSoup.find('a', title='Expansions').findNext('a').text
-	if cset == "Base":
-		cset = "Dominion"
-	illustrators = cardSoup.find('th', text='Illustrator(s)').findNext('td').text
-	dscSoup = cardSoup.find('th', text='Card text').findNext('td').prettify()
-	dscText = textMaker.handle(dscSoup)
-	dscCleanUp_imgs = dscText.replace('[ P ](/index.php/Potion "Potion")', 'Potion').replace('[ VP.png ](/index.php/Victory_point "Victory point")', 'Victory Point')
-	dscCleanup_pxn = dscCleanUp_imgs.replace('_', '').replace(' $', '$').replace('|  ', '').replace('| ', '').replace('\\', '').replace('+ ', '+').replace('  .', '.').replace(' .', '.').replace('  ;', ';').replace(' ;', ';').replace(';  ', '; ').replace(':  ', ': ').replace(',  ', ', ').replace('  ', ' ')
-	description = dscCleanup_pxn.strip()
 
 	if name not in ignoredCards:
+		cost = cardSoup.find('a', title='Cost').findNext('img')['alt']
+		types = cardSoup.find('a', title='Card types').findNext('td').text
+		cset = cardSoup.find('a', title='Expansions').findNext('a').text
+		if cset == "Base":
+			cset = "Dominion"
+		illustrators = cardSoup.find('th', text='Illustrator(s)').findNext('td').text
+		dscSoup = cardSoup.find('th', text='Card text').findNext('td').prettify()
+		dscText = textMaker.handle(dscSoup)
+		dscCleanUp_imgs = dscText.replace('[ P ](/index.php/Potion "Potion")', 'Potion').replace('[ VP.png ](/index.php/Victory_point "Victory point")', 'Victory Point')
+		dscCleanup_pxn = dscCleanUp_imgs.replace('_', '').replace(' $', '$').replace('|  ', '').replace('| ', '').replace('\\', '').replace('+ ', '+').replace('  .', '.').replace(' .', '.').replace('  ;', ';').replace(' ;', ';').replace(';  ', '; ').replace(':  ', ': ').replace(',  ', ', ').replace('  ', ' ')
+		description = dscCleanup_pxn.strip()
+
 		try:
 			sql = """ INSERT INTO cards(name, sid, cost, types, illustrators, description) VALUES (%s, (SELECT sid FROM csets WHERE name = %s), %s, %s, %s, %s) """
 			cur.execute(sql, (name, cset, cost, types, illustrators, description))
@@ -476,9 +480,10 @@ def insertCard(cardSoup):
 			if DEBUG:
 				print("Successfully inserted {} into 'cards' table.".format(name))
 
-		except:
+		except Exception as e:
 			if DEBUG:
-				print("Could not insert {} into 'cards' table.".format(name))
+				print("Could not insert {} into 'cards' table. Error: {}".format(name, e))
+
 ### /insert a card ###
 
 ###  insert a recommendation & card-rec relationships ###
@@ -487,10 +492,10 @@ def insertRec(recSoup):
 
 	knights = ['Dame Anna', 'Dame Josephine', 'Dame Molly', 'Dame Natalie', 'Dame Sylvia', 'Sir Bailey', 'Sir Destry', 'Sir Martin', 'Sir Michael', 'Sir Vander']
 	castles = ['Humble Castle', 'Crumbling Castle', 'Small Castle', 'Haunted Castle', 'Opulent Castle', 'Sprawling Castle', 'Grand Castle', "King's Castle"]
-	allSets = ['Dominion', 'Intrigue', 'Seaside', 'Alchemy', 'Prosperity', 'Cornucopia', 'Hinterlands', 'Dark', 'Guilds', 'Adventures', 'Empires', 'Nocturne',]
+	allSets = ['Dominion', 'Intrigue', 'Seaside', 'Alchemy', 'Prosperity', 'Cornucopia', 'Hinterlands', 'Dark', 'Guilds', 'Adventures', 'Empires', 'Nocturne', 'Renaissance']
 
 	recCards = []
-	recName = ""
+	recName = None
 
 	for tag in recSoup.find('h3').next_siblings:
 		if tag.name == "table":
@@ -501,6 +506,7 @@ def insertRec(recSoup):
 						if word == "Dark":
 							word = "Dark Ages"
 						recSets.append(word)
+
 			recCards = []
 			recName = tag.select('tbody > tr')[0].select('th')[0].text.replace('[+/-]', '').strip()
 
@@ -513,6 +519,8 @@ def insertRec(recSoup):
 						recCards.append(castle)
 				elif link.text == "ill-Gotten Gains":
 					recCards.append("Ill-Gotten Gains")
+				elif link.text == "Jack of all Trades":
+					recCards.append("Jack of All Trades")
 				else:
 					recCards.append(link.text)
 
@@ -525,6 +533,8 @@ def insertRec(recSoup):
 						recCards.append(castle)
 				elif link.text == "ill-Gotten Gains":
 					recCards.append("Ill-Gotten Gains")
+				elif link.text == "Jack of all Trades":
+					recCards.append("Jack of All Trades")
 				else:
 					recCards.append(link.text)
 			

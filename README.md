@@ -2,8 +2,8 @@
 
 ## 1.1	Required Files
 All of these files should be present when you download this program:
-- SI507F17_finalproject.py
-- SI507F17_finalproject_tests.py
+- dominionExplorer.py
+- dominionExplorer_tests.py
 - creds.py
 - requirements.txt (recommended)
 - dominion_cache.json (recommended)
@@ -37,7 +37,7 @@ This program requires a PSQL database. See 2.1 below for setup instructions.
 ### 1.	Database
 - Create a PSQL database with the name:
 
-> duvaljd_507final
+> Dominion-Explorer
 
 (Alternatively, you may name the database anything you want - you'll just have to update the DB_NAME variable in creds.py.)
 
@@ -46,7 +46,7 @@ This program requires a PSQL database. See 2.1 below for setup instructions.
 ### 2.	creds.py
 - Find and open the creds.py file in the program folder
 
-- Update the DB_NAME variable with the name you chose for your database, or leave it as is if you called your database duvaljd_507final as instructed 
+- Update the DB_NAME variable with the name you chose for your database, or leave it as is if you called your database Dominion-Explorer as instructed 
 
 - Update the DB_USER variable with the username for your database 
 
@@ -66,7 +66,7 @@ This program requires a PSQL database. See 2.1 below for setup instructions.
 
 - From the command prompt, type:
 
-> py SI507F17_finalproject.py
+> py dominionExplorer.py
 
 - The program will take several minutes to run the first time, because it collects a large amount of data from hundreds of individual web pages. Please be patient! If you wish to see please see section 2.3.
 
@@ -76,7 +76,7 @@ This program requires a PSQL database. See 2.1 below for setup instructions.
 
 ## 2.2	Interacting with the Prompt
 ### 0.	Some notes
-- After running the program for the first time, it is recommended that you open the SI507F17_finalproject.py file and set the GETNEWDATA variable to False. This will prevent the program from re-inserting data into the database each time you run it.
+- After running the program for the first time, it is recommended that you open the dominionExplorer.py file and set the GETNEWDATA variable to False. This will prevent the program from re-inserting data into the database each time you run it.
 
 - If you're at the main prompt and do not know what commands you can enter, type:
 
@@ -91,7 +91,7 @@ to get a list of commands.
 
 > list
 
-to build a list of all the cards in the database that will be exported to a .xlsx file, dominion.xlsx, located in the same folder as SI507F17_finalproject.py. You can use this list to find cards to search for in the program.
+to build a list of all the cards in the database that will be exported to a .xlsx file, dominion.xlsx, located in the same folder as dominionExplorer.py. You can use this list to find cards to search for in the program.
 
 ### 2.	Selecting a specific card
 - To see data for a specific card, type the name of the card into the main prompt. THE PROMPT IS CASE SENSITIVE - you must type the card name exactly as it appears on the card, including apostrophes, dashes, and spaces, or it will not find the card you request.
@@ -112,19 +112,19 @@ to let the program choose a random card for you.
 
 > card
 
-generates an xlsx file in the same folder as SI507F17_finalproject.py. The file name is the name of the card, prefixed by card_.
+generates an xlsx file in the same folder as dominionExplorer.py. The file name is the name of the card, prefixed by card_.
 
 - Typing:
 
 > recs
 
-generates an xlsx file in the same folder as SI507F17_finalproject.py. The file name is the name of the card, prefixed by recs_.
+generates an xlsx file in the same folder as dominionExplorer.py. The file name is the name of the card, prefixed by recs_.
 
 - Typing:
 
 > set
 
-generates an xlsx file in the same folder as SI507F17_finalproject.py. The file name is the name of the card, prefixed by sets_.
+generates an xlsx file in the same folder as dominionExplorer.py. The file name is the name of the card, prefixed by sets_.
 
 ### 4.	Exiting the program
 - To exit the program, you must be at the main prompt. If you are at the card prompt, type:
@@ -143,10 +143,10 @@ to exit the program.
 
 ## 2.3	Options
 ### 1.	Turning off data collection & insertion.
-- After running the file for the first time, it is recommended that you find the GETNEWDATA variable and change it to False. This will stop the program for emptying the database, creating new tables, fetching data from the cache, and inserting into the database each time you run it. It is located in the top of the SI507F17_finalproject.py file, under the comment header GLOBAL VARIABLES.
+- After running the file for the first time, it is recommended that you find the GETNEWDATA variable and change it to False. This will stop the program for emptying the database, creating new tables, fetching data from the cache, and inserting into the database each time you run it. It is located in the top of the dominionExplorer.py file, under the comment header GLOBAL VARIABLES.
 
 ### 2.	Turning on debugging
-- If you would like to watch the program's progress, or if you need to debug it, you should find the DEBUG variable and set it to True. This will flush messages out as the program completes tasks, and will give detailed error messages if applicable. It is located in the top of the SI507F17_finalproject.py file, under the comment header GLOBAL VARIABLES.
+- If you would like to watch the program's progress, or if you need to debug it, you should find the DEBUG variable and set it to True. This will flush messages out as the program completes tasks, and will give detailed error messages if applicable. It is located in the top of the dominionExplorer.py file, under the comment header GLOBAL VARIABLES.
 
 # 3.	HOW THIS PROGRAM WORKS
 ## 3.1 Overview
